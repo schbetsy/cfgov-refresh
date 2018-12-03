@@ -1,0 +1,9 @@
+{% import 'organisms/filterable-list-controls.html' as flc with context %}
+
+{% for block in page.content %}
+    {% if 'filter_controls' in block.block_type %}
+        <div class="block block__flush-top">
+            {{ flc.render(block.value) }}
+        </div>
+    {% endif %}
+{% endfor %}

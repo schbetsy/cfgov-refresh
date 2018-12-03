@@ -46,7 +46,11 @@ class BrowseFilterablePage(FilterableFeedPageMixin,
         ObjectList(CFGOVPage.settings_panels, heading='Configuration'),
     ])
 
-    template = 'browse-filterable/index.html'
+    def get_template(self, request):
+        template = 'browse-filterable/index.html'
+        if 'partial' in request.GET:
+            template = 'filterable-search-results/partial.html'
+        return template
 
     objects = PageManager()
 
