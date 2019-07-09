@@ -116,43 +116,67 @@ class TextIntroduction(blocks.StructBlock):
 class Hero(blocks.StructBlock):
     heading = blocks.CharBlock(
         required=False,
-        help_text='Maximum character count: 25 (including spaces)'
+        help_text=mark_safe(
+            'For complete guidelines on creating heroes, visit our '
+            '<a href="https://cfpb.github.io/design-manual/global-elements/heroes.html">'
+            'Design Manual</a>.'
+            '<ul class="help">Character counts (including spaces) at largest breakpoint:'
+            '<li>&bull; 41 characters max (one-line heading)</li>'
+            '<li>&bull; 82 characters max (two-line heading)</li></ul>')
     )
-    body = blocks.RichTextBlock(
+    sub_heading = blocks.RichTextBlock(
         required=False,
-        help_text='Maximum character count: 185 (including spaces)'
+        help_text=mark_safe(
+            '<ul class="help">Character counts (including spaces) at largest breakpoint:'
+            '<li>&bull; 65-186 characters (after a one-line heading)</li>'
+            '<li>&bull; 108-124 characters (after a two-line heading)</li>'
+            '</ul>')
     )
-    background_color = blocks.CharBlock(
+    large_image = ImageChooserBlock(
         required=False,
-        help_text='Specify a hex value (with the # sign) '
-                  'from our official palette: '
-                  'https://github.com/cfpb/cf-theme-cfpb/blob/'
-                  'master/src/color-palette.less'
-    )
-    is_white_text = blocks.BooleanBlock(
-        required=False,
-        help_text='Turns the hero text white. Useful if using '
-                  'a dark background color or background image.'
-    )
-    image = ImageChooserBlock(
-        required=False,
-        help_text='Should be exactly 390px tall, and up to 940px wide, '
-                  'unless this is an overlay or bleeding style hero.'
-    )
-    is_overlay = blocks.BooleanBlock(
-        required=False,
-        help_text='Select if you want the provided image to be '
-                  'a background image under the entire hero.'
-    )
-    is_bleeding = blocks.BooleanBlock(
-        required=False,
-        help_text='Select if you want the provided image to bleed '
-                  'vertically off the top and bottom of the hero.'
+        help_text=mark_safe(
+            'When saving illustrations, use a transparent background. '
+            '<a href="https://github.cfpb.gov/CFPB/hubcap/wiki/Wagtail-image-sizing-guidelines-&-tips">'
+            'See image dimension guidelines.</a>')
     )
     small_image = ImageChooserBlock(
         required=False,
-        help_text='Provide an alternate image for small displays '
-                  'when using a bleeding or overlay hero.'
+        help_text=mark_safe(
+            '<b>Optional.</b> No small image required for the '
+            'standard illustration. '
+            '<a href="https://github.cfpb.gov/CFPB/hubcap/wiki/Wagtail-image-sizing-guidelines-&-tips">'
+            'See image dimension guidelines.</a>')
+    )
+    background_color = blocks.CharBlock(
+        required=False,
+        help_text=mark_safe(
+            'Specify a hex value (with the # sign) from our '
+            '<a href="http://cfpb.github.io/design-manual/brand-guidelines/'
+            'color-principles.html">official color palette</a>.')
+    )
+    photo = blocks.BooleanBlock(
+        required=False,
+        help_text=mark_safe(
+            '<b>Optional.</b> Uses the provided image as a background under '
+            'the entire hero, creating the "Photo" style of hero (see '
+            '<a href="https://cfpb.github.io/design-manual/global-elements/heroes.html">'
+            'Design Manual</a> for details). When using this option, '
+            'make sure to specify a background color (above) for the '
+            'left/right margins that appear when screens are wider than '
+            '1200px and for the text section when the photo and text '
+            'stack at mobile sizes.')
+    )
+    white_text = blocks.BooleanBlock(
+        required=False,
+        help_text=mark_safe(
+            '<b>Optional.</b> Turns the hero text white. Useful if using '
+            'a dark background color or background image.')
+    )
+    bleed = blocks.BooleanBlock(
+        required=False,
+        help_text=mark_safe(
+            '<b>Optional.</b> Select if you want the illustration to bleed '
+            'vertically off the top and bottom of the hero space.')
     )
 
     class Meta:
